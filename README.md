@@ -8,9 +8,10 @@ This is a small project to demonstrate the UI lifecycle of a React/Redux structu
 
 Lean towards using Redux rather than Context when:
 
-1. Having your components be Pure Components is something you plan to do broadly. Pure components only rerender when one of their props has changed. Redux makes connected components Pure by default.
-2. You need to debug complex state. The Redux DevTools extension is very impressive and can save you some headaches when strange bugs rear their heads.
-3. You need to use middleware. Redux supports adding new middleware that runs logic on every action running through the system. You can do things like spawn multiple actions with a trigger action, cancel actions altogether when they match your criteria, or spawn async actions.
+1. You need to do more than just avoid prop-drilling. Context was made to avoid the hassle of passing props down from one Component to another, so if that's your only use case, Context is a simpler option; however, if your needs extend beyond this, you likely need Redux.
+2. Having your components be Pure Components is something you plan to do broadly. Pure components only rerender when one of their props has changed. Redux makes connected components Pure by default.
+3. You need to debug complex state. The Redux DevTools extension is very impressive and can save you some headaches when strange bugs rear their heads. There are tools like [LogRocket](https://logrocket.com/) that even let you use the Redux devtools in production.
+4. You need to use middleware. Redux supports adding new middleware that runs logic on every action running through the system. You can do things like spawn multiple actions with a trigger action, cancel actions altogether when they match your criteria, or spawn async actions.
 
 ### Redux Setup Process
 
