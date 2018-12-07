@@ -1,3 +1,52 @@
+# Redux/Context Scheduling Example
+
+This is a small project to demonstrate the UI lifecycle of a React/Redux structure. For contrast, an alternative React Context solution has been provided.
+
+## Redux
+
+### Reasons to use Redux
+
+Lean towards using Redux rather than Context when:
+
+1. Having your components be Pure Components is something you plan to do broadly. Pure components only rerender when one of their props has changed. Redux makes connected components Pure by default.
+2. You need to debug complex state. The Redux DevTools extension is very impressive and can save you some headaches when strange bugs rear their heads.
+3. You need to use middleware. Redux supports adding new middleware that runs logic on every action running through the system. You can do things like spawn multiple actions with a trigger action, cancel actions altogether when they match your criteria, or spawn async actions.
+
+### Redux Setup Process
+
+1. Install react-redux using NPM/Yarn.
+2. Import the Redux Provider component.
+3. Wrap your app component in the \<Provider> component
+4. Create a configureStore() function in a separate file and import into your App component file.
+5. Inside your configureStore file, import {createStore, applyMiddleware, compose} from the 'redux' package, and thunk from 'redux-thunk'.
+6. At your project root, create a 'reducers' folder and an index.js file.
+7. Inside reducers/index.js, import {combineReducers} from 'redux'.
+8. Create your first reducer file inside the reducers folder.
+9. Create an 'actions' folder at the root of your application and a file named 'actiontypes.js'. This file holds a simple Javascript object with string constants that name your action types. Add some types and move back to the reducer you created.
+10. Import your actiontypes object in your reducer.
+11. Create a default export function in your reducer that takes two parameters, the state and an action object.
+12. Create a switch statement inside your function that contains a case statement for each type of action you want this reducer to handle. 
+13. To maintain immutability, each action type should return a new *copy* of the *full* Redux state. You can do this easily with an Object.assign() call that takes an empty object as its first parameter, the state as the second, and your state changes as the third.
+14. The "default:" case should return the existing state.
+15. Back in your 'reducers/index.js' file, import your reducer and export a default that is the result of a combineReducers() call, passing it an object containing all your imported reducers.
+16. Return to the configureStore() file. Import your reducers/index.js file.
+17. Create a const called initialStore and give it some initial values, matching the structure your reducer is expecting.
+18. Fill your configureStore function with an initial parameter called initialState and set its default value to the initialStore variable you created.
+19. Inside your function, return the result of createStore(), passing your reducers, initialState, and the result of a compose() applying the thunk middleware.
+20. Return to the application \<Provider> component file, and add the "store" prop, passing it the result of a call to configureStore().
+21. Lastly, in your 'actions' folder, create an action creator file that returns an object in the Standard Flux Action format, including a 'type', 'payload', and an optional 'meta' section. The 'type' should be a constant from your actiontypes.js file, and the 'payload' an object containing the information your reducer will need in order to create the next Redux state object.
+
+### Redux Connect to Component
+
+Now Redux is set up and running, but there are no React components connected to the store. Follow the below steps to create the first connected component.
+
+1. Import {bindActionCreators} from 'redux', {connect} from 'react-redux', and the action creator file pertinent to your new component.
+
+
+
+
+## Create-React-App Boilerplate:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
